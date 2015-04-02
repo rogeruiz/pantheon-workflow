@@ -1,0 +1,42 @@
+#/bin/bash
+
+echo "Upload wp-content/uploads to Pantheon";
+
+UPLOAD_DIR=$1
+DIRECTION=$2
+ENV=$3
+UUID=$4
+
+if [[ -n $ENV && -n $UUID ]]; then
+  if [ -d $UPLOAD_DIR ]; then
+    if [[ -n $DIRECTION && $DIRECTION == 'upload' ]]; then
+      rsync -rlvz \
+        --size-only \
+        --ipv4 \
+        --exclude=.git \
+        --progress \
+        -e 'ssh -p 2222' \
+        $UPLOAD_DIR/* \
+        $ENV.$UUID@appserver.$ENV.$UUID.drush.in:code/wp-content/uploads;
+    else
+      rsync -rlvz \
+        --size-only \
+        --ipv4 \
+        --exclude=.git \
+        --progress \
+        -e 'ssh -p 2222' \
+        $ENV.$UUID@appserver.$ENV.$UUID.drush.in:code/wp-content/uploads/ \
+        $UPLOAD_DIR;
+    fi
+    echo "Uploads synchronized successfully.";
+  else
+    echo "wp-content/uploads was not found in your current directory";
+    exit 1;
+  fi
+else
+    echo "Please pass in ENV and UUID parameters";
+    echo "example: sync2pantheon \$DIRECTION \$PROJECT_NAME_ENV \$PROJECT_NAME_UUID";
+    echo "example: sync2pantheon download dev \$PROJEC_NAME_UUID"
+    echo "example: sync2pantheon upload dev \$PROJEC_NAME_UUID"
+    exit 1;
+fi
