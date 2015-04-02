@@ -1,0 +1,6 @@
+[mysqldump]
+user='external'
+password='external'
+port='3306'
+host='vvv.dev'
+verbose

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [  ! -d ./tmp ]; then
+  mkdir -v ./tmp;
+fi
+
+PROJ_DB_NAME=$1
+
+DATE=`date "+%Y%m%d-%H%M%S"`
+mysqldump --defaults-file=./conf/mysql.cnf $PROJ_DB_NAME > ./tmp/$DATE-$PROJ_DB_NAME.sql
+
