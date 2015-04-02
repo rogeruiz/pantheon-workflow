@@ -1,0 +1,10 @@
+# Ignore tmp directory. All the magic happens in there.
+tmp/
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+*.sublime-project
+*.sublime-workspace
+.svn
+.idea
