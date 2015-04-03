@@ -1,7 +1,5 @@
 #/bin/bash
 
-echo "Upload wp-content/uploads to Pantheon";
-
 UPLOAD_DIR=$1
 DIRECTION=$2
 ENV=$3
@@ -34,9 +32,10 @@ if [[ -n $ENV && -n $UUID ]]; then
     exit 1;
   fi
 else
-    echo "Please pass in ENV and UUID parameters";
-    echo "example: sync2pantheon \$DIRECTION \$PROJECT_NAME_ENV \$PROJECT_NAME_UUID";
-    echo "example: sync2pantheon download dev \$PROJEC_NAME_UUID"
-    echo "example: sync2pantheon upload dev \$PROJEC_NAME_UUID"
+    echo "Please pass in UPLOAD_DIR, DIRECTION, ENV, and UUID parameters";
+    echo "example: ❯ sync2pantheon \$UPLOAD_DIR \$DIRECTION \$PROJ_NAME_ENV \$PROJ_NAME_UUID";
+    echo "";
+    echo "example: ❯ sync2pantheon \$PROJ_NAME_UPLOADS_DIR download dev \$PROJ_NAME_UUID"
+    echo "example: ❯ sync2pantheon \$PROJ_NAME_UPLOADS_DIR upload dev \$PROJ_NAME_UUID"
     exit 1;
 fi
