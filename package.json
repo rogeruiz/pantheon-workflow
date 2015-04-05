@@ -1,0 +1,31 @@
+{
+  "name": "pantheon-workflow",
+  "version": "0.1.0",
+  "description": "CLI tools for working with Pantheon hosting services.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rogeruiz/pantheon-workflow"
+  },
+  "keywords": [
+    "wordpress",
+    "pantheon",
+    "cli"
+  ],
+  "author": "Roger Steve Ruiz <hi@rog.gr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rogeruiz/pantheon-workflow/issues"
+  },
+  "homepage": "https://github.com/rogeruiz/pantheon-workflow",
+  "dependencies": {
+    "commander": "^2.7.1",
+    "express": "^4.12.3",
+    "lodash": "^3.6.0",
+    "rsvp": "^3.0.18",
+    "rsync": "^0.4.0"
+  }
+}
