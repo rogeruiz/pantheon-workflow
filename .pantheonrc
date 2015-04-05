@@ -1,0 +1,8 @@
+{
+  "project_name": {
+    "uuid": "4cc6-eec512c3-a57d-0267788fabbc-97bb",
+    "db": "wordpress_project_name",
+    "env": "dev",
+    "root": "$HOME/Developer/vvv/www/project_name/htdocs/"
+  },
+}

@@ -1,0 +1,91 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var _ = require('lodash');
+var RSVP = require('rsvp');
+var rsync = require('rsync');
+var path = require('path');
+// TODO: Make this better! Resolve to the package.json when it's installed
+// globally or when it's run inside of ./bin instead of the project_root;
+var pkg = require('../package.json');
+var program = require('commander');
+
+program.version(pkg.version);
+
+program
+  .option('-p, --project <name>', 'project name on Pantheon')
+  .option('-e, --env <environment>', 'override environment from .pantheonrc');
+
+var loadRc = {
+  homeDir: new RSVP.Promise(function(resolve, reject) {
+    fs.readFile('$HOME/.pantheonrc', function(error, projects) {
+      if (error) {
+        reject(error);
+      }
+      resolve(projects);
+    });
+  }),
+  workingDir: new RSVP.Promise(function(resolve, reject) {
+    // TODO: Resolve this to the project root, not where the command was run from.
+    fs.readFile('../.pantheonrc', function(error, projects) {
+      if (error) {
+        reject(error);
+      }
+      resolve(projects);
+    });
+  })
+};
+
+RSVP.hashSettled(loadRc).then(function(attempts) {
+  var projects;
+  if (attempts.workingDir.state === 'fulfilled') {
+    projects = JSON.parse(attempts.workingDir.value.toString());
+  } else if (attempts.homeDir.state === 'fulfilled') {
+    projects = JSON.parse(attempts.homeDir.value.toString());
+  // } else {
+  //   console.error('❯ %s not found', attempts.workingDir.reason.path);
+  //   console.error('❯ %s not found', attempts.homeDir.reason.path);
+  //   console.log('please verify .pantheonrc is installed correctly, and run pw again.');
+  //   return;
+  }
+
+  program.command('sync <direction> ', 'direction to sync the latest mysqldump & wp-content/uploads directory for the current Pantheon environment');
+  program.command('db <direction> ', 'direction to sync the latest mysqldump for the current Pantheon environment');
+  program.command('media <direction> ', 'direction to sync the latest mysqldump for the current Pantheon environment');
+
+  // var project = projects[program.project];
+
+  // if (project) {
+  //   console.log(project);
+  // } else {
+  //   console.log('project not found in .pantheonrc file');
+  //   console.log('please verify the project %s exists in your .pantheonrc file', program.project);
+  //   return;
+  // }
+
+
+  program.parse(process.argv);
+
+   // .action(function(cmd) {
+   //   switch (cmd) {
+   //    case 'up':
+   //      break;
+   //    case 'down':
+   //      break;
+   //    default:
+   //      // do nothing
+   //   }
+   // });
+
+});
+
+// syncs both media and db either up or down
+// pw sync up
+// pw sync down
+
+// pw media up
+// pw media down
+
+// pw db up
+// pw db down
+

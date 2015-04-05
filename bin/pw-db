@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+
+program.parse(process.argv);
+
+var pkgs = program.args;
+
+if (!pkgs.length) {
+  console.error('direction required to sync the latest mysqldump for the current Pantheon environment, <up | down>');
+  process.exit(1);
+}
+
+console.log();
+pkgs.forEach(function(pkg){
+  console.log('  db : %s', pkg);
+});
+console.log();
