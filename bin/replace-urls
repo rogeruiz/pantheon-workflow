@@ -1,7 +1,0 @@
-#!/bin/bash
-
-SEARCH=$1
-REPLACE=$2
-SOURCE=$3
-
-sed -e "s/$SEARCH/$REPLACE/g" tmp/$SOURCE > tmp/pantheon-$SOURCE;
