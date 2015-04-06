@@ -27,22 +27,29 @@
 <h3>
 <a id="this-project-is-still-very-much-a-work-in-progress" class="anchor" href="#this-project-is-still-very-much-a-work-in-progress" aria-hidden="true"><span class="octicon octicon-link"></span></a>This project is still very much a work in progress.</h3>
 
-<p>Currently, I'm tackling three problems I see come up really often.</p>
+<p>To get started, just run <code>npm install</code> &amp; run the main binary from <code>./bin/paw</code>:</p>
 
-<ul>
-<li>Dumping local databases</li>
-<li>Migrating URLs in local databases to pantheon environments</li>
-<li>Syncing wp-content/uploads</li>
-</ul>
+<h5>
+<a id="commands" class="anchor" href="#commands" aria-hidden="true"><span class="octicon octicon-link"></span></a>commands</h5>
 
-<div class="highlight highlight-sh"><pre><span class="pl-c"># Using dump-local-db</span>
-./bin/fetch-db <span class="pl-smi">$DEV_DB_NAME</span>
+<div class="highlight highlight-sh"><pre>❯ ./bin/paw db -p project_name
+❯ ./bin/paw media -p project_name
+❯ ./bin/paw sync -p project_name <span class="pl-c"># do both db + sync</span>
+❯ <span class="pl-c"># go forth &amp; prosper</span></pre></div>
 
-<span class="pl-c"># Using replace-urls</span>
-./bin/replace-urls <span class="pl-smi">$LOCAL_DEV_URL</span> <span class="pl-smi">$PANTHEON_DEV_URL</span> <span class="pl-smi">$SQL_FILE_NAME</span>
+<h5>
+<a id="preferences" class="anchor" href="#preferences" aria-hidden="true"><span class="octicon octicon-link"></span></a>preferences</h5>
 
-<span class="pl-c"># Using sync-uploads</span>
-./bin/sync-uploads <span class="pl-smi">$PATH_TO_WP_UPLOADS</span> <span class="pl-smi">$DIRECTION</span> <span class="pl-smi">$PANTHEON_ENV</span> <span class="pl-smi">$PANTHEON_UUID</span></pre></div>
+<p>Setup a .pantheonrc in your $HOME directory or in the current directory. The structure of the file should be valid JSON in this format:</p>
+
+<div class="highlight highlight-json"><pre>{
+  <span class="pl-s"><span class="pl-pds">"</span>project_name<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>uuid<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>4cc6-eec512c3-a57d-0267788fabbc-97bb<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>db<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>wordpress_project_name<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>env<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>dev<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>root<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>$HOME/Developer/vvv/www/project_name/htdocs/<span class="pl-pds">"</span></span>
+  }
+}</pre></div>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/rogeruiz/pantheon-workflow">Pantheon Automation Workflow</a> is maintained by <a href="https://github.com/rogeruiz">rogeruiz</a>.</span>
