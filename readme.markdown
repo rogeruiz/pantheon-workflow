@@ -1,7 +1,7 @@
 Pantheon &hearts; Automation Workflow
 ===
 
-I use Pantheon [at work](http://teamcolab.com/) and I find myself having to do a lot of manual syncing between different environments. Because of this, I made these helpful little bash scripts based off of [migrating instructions I found here](https://pantheon.io/blog/importing-large-wordpress-sites-pantheon).
+I use Pantheon [at work](http://teamcolab.com/) and I find myself having to do a lot of manual syncing between different environments. Because of this, I made node cli-tooling based off of [migrating instructions I found here](https://pantheon.io/blog/importing-large-wordpress-sites-pantheon).
 
 ### This project is still very much a work in progress.
 
