@@ -1,18 +1,99 @@
 #!/usr/bin/env node
 
+var fs = require('fs');
+var _ = require('lodash');
+var RSVP = require('rsvp');
+var rsync = require('rsync');
 var program = require('commander');
+var loadRc = require('./load-rc');
 
-program.parse(process.argv);
+program
+  .option('-p, --project <name>', 'project name on Pantheon')
+  .parse(process.argv);
 
-var pkgs = program.args;
 
-if (!pkgs.length) {
-  console.error('direction required to sync the latest mysqldump for the current Pantheon environment, <up | down>');
-  process.exit(1);
-}
+loadRc.then(function(projects) {
 
-console.log();
-pkgs.forEach(function(pkg){
-  console.log('  media : %s', pkg);
+  var pkgs = program.args;
+  var project = program.project;
+
+  console.log();
+  console.log(' selected project passed by flag: -p, --project <%s>', project);
+  console.log();
+
+  if (!pkgs.length) {
+    console.error('direction required to sync the latest mysqldump for the current Pantheon environment, <up | down>');
+    process.exit(1);
+  }
+
+  console.log(projects);
+
+  try {
+    projects = JSON.parse(projects);
+  } catch (e) {
+    console.log('x', e);
+  }
+
+  if (projects[program.project]) {
+    console.log(projects[program.project]);
+  } else {
+    console.log('project not found in .pantheonrc file');
+    console.log('please verify the project <%s> exists in your .pantheonrc file', program.project);
+    process.exit(1);
+  }
+
+  console.log();
+  pkgs.forEach(function(pkg){
+    // Do the rsync stuff in here?
+    console.log('  media : %s', pkg);
+  });
+  console.log();
+
+
 });
-console.log();
+
+
+/*
+#/bin/bash
+
+UPLOAD_DIR=$1
+DIRECTION=$2
+ENV=$3
+UUID=$4
+
+if [[ -n $ENV && -n $UUID ]]; then
+  if [ -d $UPLOAD_DIR ]; then
+    if [[ -n $DIRECTION && $DIRECTION == 'upload' ]]; then
+      rsync -rlvz \
+        --size-only \
+        --ipv4 \
+        --exclude=.git \
+        --progress \
+        -e 'ssh -p 2222' \
+        $UPLOAD_DIR/* \
+        $ENV.$UUID@appserver.$ENV.$UUID.drush.in:code/wp-content/uploads;
+    else
+      rsync -rlvz \
+        --size-only \
+        --ipv4 \
+        --exclude=.git \
+        --progress \
+        -e 'ssh -p 2222' \
+        $ENV.$UUID@appserver.$ENV.$UUID.drush.in:code/wp-content/uploads/ \
+        $UPLOAD_DIR;
+    fi
+    echo "Uploads synchronized successfully.";
+  else
+    echo "wp-content/uploads was not found in your current directory";
+    exit 1;
+  fi
+else
+    echo "Please pass in UPLOAD_DIR, DIRECTION, ENV, and UUID parameters";
+    echo "example: ❯ sync2pantheon \$UPLOAD_DIR \$DIRECTION \$PROJ_NAME_ENV \$PROJ_NAME_UUID";
+    echo "";
+    echo "example: ❯ sync2pantheon \$PROJ_NAME_UPLOADS_DIR download dev \$PROJ_NAME_UUID"
+    echo "example: ❯ sync2pantheon \$PROJ_NAME_UPLOADS_DIR upload dev \$PROJ_NAME_UUID"
+    exit 1;
+fi
+
+*/

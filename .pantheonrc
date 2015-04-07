@@ -4,5 +4,5 @@
     "db": "wordpress_project_name",
     "env": "dev",
     "root": "$HOME/Developer/vvv/www/project_name/htdocs/"
-  },
+  }
 }
