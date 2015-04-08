@@ -8,3 +8,6 @@ Thumbs.db
 *.sublime-workspace
 .svn
 .idea
+
+# Node
+node_modules
