@@ -9,6 +9,7 @@ var loadRc = require('./load-rc');
 
 program
   .option('-p, --project <name>', 'project name on Pantheon')
+  .option('-n, --dry-run', 'show what would have been transferred')
   .parse(process.argv);
 
 loadRc.then(function(projects) {
@@ -56,10 +57,16 @@ loadRc.then(function(projects) {
     });
   rsync.set('size-only');
   rsync.set('ipv4');
+  if (program.dryRun) {
+    rsync.set('dry-run');
+  }
 
   rsync.execute(function(err, code, cmd) {
-    console.log('ran successful `%s`', cmd);
-    console.log();
+    if (code === 0) {
+      console.log('ran successful `%s`', cmd);
+    } else {
+      console.error(err);
+    }
   }, function(data) {
     console.log(data.toString());
   });

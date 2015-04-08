@@ -10,9 +10,10 @@ To get started, just run `npm install` & run the main binary from `./bin/paw`:
 ##### commands
 
 ```sh
-❯ ./bin/paw db -p project_name
-❯ ./bin/paw media -p project_name
-❯ ./bin/paw sync -p project_name # do both db + sync
+❯ ./bin/paw media up project_name
+❯ ./bin/paw media down project_name
+❯ # ./bin/paw db <direction> project_name
+❯ # ./bin/paw sync <direction> project_name # do both db + media
 ❯ # go forth & prosper
 ```
 
@@ -30,3 +31,5 @@ Setup a .pantheonrc in your $HOME directory or in the current directory. The str
   }
 }
 ```
+
+Try putting a Pantheon project into the local .pantheonrc file and run `./bin/paw media <direction> <project>`.
