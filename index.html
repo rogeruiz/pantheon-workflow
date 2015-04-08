@@ -32,9 +32,10 @@
 <h5>
 <a id="commands" class="anchor" href="#commands" aria-hidden="true"><span class="octicon octicon-link"></span></a>commands</h5>
 
-<div class="highlight highlight-sh"><pre>❯ ./bin/paw db -p project_name
-❯ ./bin/paw media -p project_name
-❯ ./bin/paw sync -p project_name <span class="pl-c"># do both db + sync</span>
+<div class="highlight highlight-sh"><pre>❯ ./bin/paw media up project_name
+❯ ./bin/paw media down project_name
+❯ <span class="pl-c"># ./bin/paw db &lt;direction&gt; project_name</span>
+❯ <span class="pl-c"># ./bin/paw sync &lt;direction&gt; project_name # do both db + media</span>
 ❯ <span class="pl-c"># go forth &amp; prosper</span></pre></div>
 
 <h5>
@@ -50,6 +51,8 @@
     <span class="pl-s"><span class="pl-pds">"</span>root<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>$HOME/Developer/vvv/www/project_name/htdocs/<span class="pl-pds">"</span></span>
   }
 }</pre></div>
+
+<p>Try putting a Pantheon project into the local .pantheonrc file and run <code>./bin/paw media &lt;direction&gt; &lt;project&gt;</code>.</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/rogeruiz/pantheon-workflow">Pantheon Automation Workflow</a> is maintained by <a href="https://github.com/rogeruiz">rogeruiz</a>.</span>
