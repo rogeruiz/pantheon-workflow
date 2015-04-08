@@ -1,9 +1,11 @@
 var fs = require('fs');
 var RSVP = require('rsvp');
+var path = require('path');
 
 var loadRc = {
   homeDir: new RSVP.Promise(function(resolve, reject) {
-    fs.readFile('$HOME/.pantheonrc', function(error, projects) {
+    var homeDir = path.join(process.env.HOME, '.pantheonrc');
+    fs.readFile(homeDir, function(error, projects) {
       if (error) {
         reject(error);
       }
