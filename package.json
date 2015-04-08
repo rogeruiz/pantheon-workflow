@@ -2,7 +2,10 @@
   "name": "pantheon-workflow",
   "version": "0.1.0",
   "description": "CLI tools for working with Pantheon hosting services.",
-  "main": "index.js",
+  "main": "./bin/paw",
+  "bin": {
+    "paw" : "bin/paw"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
