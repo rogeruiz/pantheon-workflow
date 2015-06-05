@@ -1,13 +1,38 @@
 #!/usr/bin/env node
 
-// TODO: Make this better! Resolve to the package.json when it's installed
-// globally or when it's run inside of ./bin instead of the project_root;
-var pkg = require('../package.json');
-var program = require('commander');
+var pkg = require( '../package.json' );
+var program = require( 'commander' );
 
+/**
+ * Pantheon Automation Workflow (PAW)
+ */
 program
-  .version(pkg.version)
-  .command('sync <direction>','runs both db & media for the chosen project in chosen direction')
-  .command('db <direction>', 'direction to sync latest mysqldump for project')
-  .command('media <direction>', 'direction to sync wp-content/uploads for project')
-  .parse(process.argv);
+  .version( pkg.version )
+  /**
+   * @command sync
+   * @param {String} direction The direction of the synchronization. Can be
+   *                           either `up` or `down`.
+   */
+  .command(
+    'sync <direction>',
+    'runs both db & media for the chosen project in chosen direction'
+  )
+  /**
+   * @command db
+   * @param {String} direction The direction of the database synchronization.
+   *                           Can be either `up` or `down`.
+   */
+  .command(
+    'db <direction>',
+    'direction to sync latest mysqldump for project'
+  )
+  /**
+   * @command media
+   * @param {String} direction The direction to synchornize the `./wp-content/uploads`
+   *                           directory. Can be either `up` or `down`.
+   */
+  .command(
+    'media <direction>',
+    'direction to sync wp-content/uploads for project'
+  )
+  .parse( process.argv );
