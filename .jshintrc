@@ -1,0 +1,80 @@
+{
+	"maxerr": 50,
+
+
+	"bitwise": true,
+	"curly": true,
+	"eqeqeq": true,
+	"forin": true,
+	"immed": true,
+	"indent": 4,
+	"latedef": true,
+	"newcap": true,
+	"noarg": true,
+	"noempty": true,
+	"nonew": true,
+	"quotmark": true,
+	"undef": true,
+	"unused": true,
+	"trailing": true,
+
+	"strict": false,
+	"camelcase": false,
+	"plusplus": false,
+	"maxparams": false,
+	"maxdepth": false,
+	"maxstatements": false,
+	"maxcomplexity": false,
+	"maxlen": false,
+
+
+	"eqnull": true,
+	"esnext": true,
+	"boss": true,
+	"evil": true,
+	"multistr": true,
+	"smarttabs": true,
+	"validthis": true,
+
+	"globalstrict": false,
+	"asi": false,
+	"debug": false,
+	"es5": false,
+	"moz": false,
+	"expr": false,
+	"funcscope": false,
+	"iterator": false,
+	"lastsemic": false,
+	"laxbreak": false,
+	"laxcomma": false,
+	"loopfunc": false,
+	"proto": false,
+	"scripturl": false,
+	"shadow": false,
+	"sub": false,
+	"supernew": false,
+
+
+	"node": true,
+
+	"browser": false,
+	"jquery": false,
+	"couch": false,
+	"devel": false,
+	"dojo": false,
+	"qunit": false,
+	"mootools": false,
+	"nonstandard": false,
+	"prototypejs": false,
+	"rhino": false,
+	"worker": false,
+	"wsh": false,
+	"yui": false,
+
+
+	"nomen": true,
+
+	"onevar": false,
+	"passfail": false,
+	"white": false
+}

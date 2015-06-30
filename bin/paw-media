@@ -1,28 +1,29 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
-var _ = require('lodash');
-var RSVP = require('rsvp');
-var Rsync = require('rsync');
-var program = require('commander');
-var loadRc = require('./load-rc');
+var program = require( 'commander' );
+var fs = require( 'fs' );
+var _ = require( 'lodash' );
+var RSVP = require( 'rsvp' );
+var Rsync = require( 'rsync' );
+var loadRc = require( './load-rc' );
 
 program
-  .option('-p, --project <name>', 'project name on Pantheon')
-  .option('-n, --dry-run', 'show what would have been transferred')
-  .parse(process.argv);
+  .option( '-p, --project <name>', 'project name on Pantheon' )
+  .option( '-n, --dry-run', 'show what would have been transferred' )
+  .parse( process.argv );
 
-loadRc.then(function(projects) {
+loadRc.then(function( projects ) {
 
   var pkgs = program.args;
-  var direction = pkgs[0];
-  var project = pkgs[1];
+  var direction = pkgs[ 0 ];
+  var project = pkgs[ 1 ];
   var mediaDir = '$MEDIA_DIR/wp-content/uploads/';
   var pantheonEndpoint = '$ENV.$UUID@appserver.$ENV.$UUID.drush.in:code/wp-content/uploads/';
 
-  if (!pkgs.length) {
-    console.error('direction required to sync the latest mysqldump for the current Pantheon environment, <up | down>');
-    process.exit(1);
+  if ( ! pkgs.length ) {
+    console.error( 'A direction is required!' );
+    console.log( 'example: <up> | <down>' );
+    process.exit( 1 );
   }
 
   if (projects[project]) {
